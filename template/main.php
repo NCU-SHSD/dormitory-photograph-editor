@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="src/css/bootstrap.min.css" integrity>
-<link rel="stylesheet" href="src/css/main.style.css">
-<link rel="stylesheet" href="src/css/test.style.css">
-<script src="src/js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"></script>
-<script src="src/js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"></script>
-<script src="src/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"></script>
-<script src="src/js/main.animation.js"></script>
+<link rel="stylesheet" href="https://web-design.app.z12.tw/web-shell_davin/src/css/bootstrap.min.css" integrity>
+<link rel="stylesheet" href="https://web-design.app.z12.tw/web-shell_davin/src/css/main.style.css">
+<link rel="stylesheet" href="https://web-design.app.z12.tw/web-shell_davin/src/css/test.style.css">
+<script src="https://web-design.app.z12.tw/web-shell_davin/src/js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"></script>
+<script src="https://web-design.app.z12.tw/web-shell_davin/src/js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"></script>
+<script src="https://web-design.app.z12.tw/web-shell_davin/src/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"></script>
+<script src="https://web-design.app.z12.tw/web-shell_davin/src/js/main.animation.js"></script>
+<?php include_once( $_styleSheet ); ?>
 </head>
 <body>
 <main class="container">
@@ -19,7 +20,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-default">
     <a class="navbar-brand" href="#">
-      <img src="/src/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" onerror="this.src='https://ls-images.xn--ppensourced-qfb.com/original/16/69/9b/29-mozilla-public-license-2-0-mpl-2-0-31-1424167402.png';">
+      <img src="#" width="30" height="30" class="d-inline-block align-top" alt="Logo">
       WebSite
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" onclick="hamburgerMenuAnimation(this.children[0].children[0])">
