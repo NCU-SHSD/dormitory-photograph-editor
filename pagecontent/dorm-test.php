@@ -11,7 +11,7 @@ $data_dorm = [];
 while($qdata_dorm = mysqli_fetch_assoc($qresult_dorm))
     $data_dorm[] = $qdata_dorm;
 
-$query_dorm_tag = "SELECT id, note FROM OSDS_SERVICE_photos";
+$query_dorm_tag = "SELECT * FROM OSDS_SERVICE_photos";
 $qresult_dorm_tag = mysqli_query($conn, $query_dorm_tag) or die(throwError('query failed'));
 $qdata_dorm_tag = null;
 $data_dorm_tag = [];
@@ -45,7 +45,7 @@ function changeSublist(my){
     return document.querySelector("#phototag").innerHTML = "";
   }
   document.querySelector("#phototag").innerHTML = "";
-  document.querySelector("#phototag").onchange = selectPhoto;
+  document.querySelector("#phototag").onchange = showPicture;//selectPhoto;
   document.querySelector("#newtag").onblur = checkName;
   document.querySelector("#phototag").appendChild(createElement("option", {
     innerText:`-------`
@@ -57,13 +57,13 @@ function changeSublist(my){
   for(let obj of list){
     document.querySelector("#phototag").appendChild(createElement("option", {
       value:obj.uuid,
-      innerText:`${my[my.selectedIndex].innerText} - ${obj.note}`
+      innerText:`${obj.note}`
     }));
   }
 }
 
-function selectPhoto(){
-    let uuid=parseInt(this.value);
+function selectPhoto( value ){
+    let uuid=parseInt( value || this.value);
     if(uuid===-1){
         document.querySelector("#phototag").style.display="none";
         document.querySelector("#newtag").style.display="inline";
@@ -79,16 +79,28 @@ function checkName(){
     }
 }
 
+function showPicture(){
+  var selectBox = document.getElementById("phototag");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+  selectPhoto( selectedValue );
+  let picture_obj = dormInfo.filter(v=>selectedValue==v.uuid);
+  let picture_src = picture_obj[0].src;
+  document.getElementById("show").src=`https://in.ncu.edu.tw/~ncu7221/OSDS/${picture_src}`;
+}
+
 </script>
 <form action="dorm_test.php">
     <!-- <input type="file" id="file-uploader" data-target="file-uploader" accept="image/*"/> -->
-    <select name="dorm" id="dorm" onchange="changeSublist(this)">    
+    <select name="dorm" id="dorm" onchange="changeSublist(this)">  
+    <option value="" selected>------</option>  
     <?php for($i=0;$i<count($data_dorm);$i++): ?>
         <option value="<?=$data_dorm[$i]['photo']?>"><?=$data_dorm[$i]['fullname']?></option>
     <?php endfor; ?>
     </select>
-    <select name="phototag" id="phototag" class="w-75"></select>
-    <input style="display:none;" name="tag" id="newtag" class="w-75">
+    <select name="phototag" id="phototag"></select>
+    <input style="display:none;" name="tag" id="newtag">
     <input type="submit" id="upload"/>  
 </form>
+<img id="show" scr="">
+
 
