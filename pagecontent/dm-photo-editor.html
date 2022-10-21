@@ -262,6 +262,7 @@
       document.getElementById('save').addEventListener('click', function () {
         var dataURL = stage.toDataURL({ pixelRatio: 10 });
         // 將 DataURL 放到表單中
+        
         $("input[name='imagestring']").val(dataURL);
         document.getElementById('upload').disabled=false;
       });

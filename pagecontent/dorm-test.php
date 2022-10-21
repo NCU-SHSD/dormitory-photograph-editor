@@ -86,6 +86,69 @@ function showPicture(){
   let picture_obj = dormInfo.filter(v=>selectedValue==v.uuid);
   let picture_src = picture_obj[0].src;
   document.getElementById("show").src=`https://in.ncu.edu.tw/~ncu7221/OSDS/${picture_src}`;
+  document.getElementById("update").hidden=false;
+  document.getElementById("remove").hidden=false;
+}
+
+function update( pid ){
+  pid = pid || document.querySelector("#phototag").value;
+  // console.log( this )
+  if( pid == undefined ){
+    alert("Didn't select any photo");
+    return;
+  }
+  location.href = `dm-photo-editor.php?pid=${parseInt( pid )}`;
+}
+
+function remove(){
+  let formData = new FormData();
+  let ptag = document.querySelector("#phototag").value;
+  window.alert(ptag);
+  formData.append("delete", ptag);
+  REQUEST({
+        url:"",
+        method:"POST",
+        params:formData,
+        failVerif:_failedReturn,
+      }, (data)=>{
+        alert("刪除成功");
+        location.reload();
+      }, (fail)=>{
+        alert("error")
+      });
+  
+}
+
+function REQUEST(opt, callback, failed){
+  if(typeof opt=="string"){
+    var url = opt, all = false, verif = defVerif, 
+        params = "";
+  }else{
+    var { url, verif, failVerif, all, headers, params, method } = opt;
+  }
+  window.alert(opt);
+
+  verif = verif || defVerif;
+  failVerif = failVerif || defVerifFailed;
+  method = method || "GET";
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if(verif(this)){
+      callback(all?xhttp:xhttp.responseText);
+    }else if(failVerif(this)){
+      failed(all?xhttp:xhttp.responseText);
+    }
+  };
+  xhttp.open(method, `${url}`, true);
+  if(headers!=undefined){
+    let headkey = Object.keys(headers);
+    // http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    for(var i=0;i<headkey.length;i++){
+      let key = headkey[i];    
+      xhttp.setRequestHeader(key, headers[key]);
+    }
+  }
+  xhttp.send(params);
 }
 
 </script>
@@ -99,8 +162,9 @@ function showPicture(){
     </select>
     <select name="phototag" id="phototag"></select>
     <input style="display:none;" name="tag" id="newtag">
-    <input type="submit" id="upload"/>  
 </form>
-<img id="show" scr="">
-
+<img id="show" scr="" height=480>
+<br>
+<button id="update"onclick=update() hidden>更新</button>
+<button id="remove"onclick=remove() hidden>刪除</button>
 
