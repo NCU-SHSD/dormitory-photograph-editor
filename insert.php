@@ -1,0 +1,9 @@
+<?php
+session_start();
+$note=$_GET['note'];
+$id=$_GET['id'];
+$_SESSION['note']=$note;
+$_SESSION['id']=$id;
+$insert=-1;
+header('location:dm-photo-editor.php?pid='.$insert);
+?>

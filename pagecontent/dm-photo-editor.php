@@ -138,6 +138,10 @@
           'click',
           function () {
             tr.hide();
+            var dataURL = stage.toDataURL({ pixelRatio: 10 });
+        
+            $("input[name='imagestring']").val(dataURL);
+            document.getElementById('upload').disabled=false;
         });
 
       textNode.on('dblclick dbltap', () => {
@@ -258,12 +262,4 @@
       });    
         }
       );
-
-      document.getElementById('save').addEventListener('click', function () {
-        var dataURL = stage.toDataURL({ pixelRatio: 10 });
-        // 將 DataURL 放到表單中
-        
-        $("input[name='imagestring']").val(dataURL);
-        document.getElementById('upload').disabled=false;
-      });
     </script>
